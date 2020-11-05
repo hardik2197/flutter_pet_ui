@@ -1,5 +1,8 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_ui/detail_screen.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'configure.dart';
 
@@ -20,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return AnimatedContainer(
       transform: Matrix4.translationValues(xOffset, yOffset, 0)
         ..scale(scaleFactor),
-        // ..rotateY(isDrawerOpen ? -0.5 : 0),
+      // ..rotateY(isDrawerOpen ? -0.5 : 0),
       duration: Duration(milliseconds: 200),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(isDrawerOpen ? 40 : 0.0),
@@ -39,7 +42,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   isDrawerOpen
                       ? IconButton(
-                          icon: Icon(Icons.arrow_back_ios),
+                          icon: Icon(
+                            Icons.arrow_back_ios,
+                            color: primaryGreen,
+                          ),
                           onPressed: () {
                             setState(() {
                               xOffset = 0;
@@ -49,7 +55,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             });
                           })
                       : IconButton(
-                          icon: Icon(Icons.menu),
+                          icon: Icon(
+                            Icons.menu,
+                            color: primaryGreen,
+                          ),
                           onPressed: () {
                             setState(() {
                               xOffset = 230;
@@ -72,7 +81,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
-                  CircleAvatar()
+                  CircleAvatar(
+                    backgroundColor: primaryGreen,
+                    child: FaIcon(
+                      FontAwesomeIcons.home,
+                      color: Colors.white,
+                    ),
+                  )
                 ],
               ),
             ),
@@ -84,9 +99,15 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Icon(Icons.search),
+                  Icon(
+                    Icons.search,
+                    color: primaryGreen,
+                  ),
                   Text('Search pet to adopt'),
-                  Icon(Icons.settings)
+                  Icon(
+                    Icons.settings,
+                    color: primaryGreen,
+                  )
                 ],
               ),
             ),
@@ -158,6 +179,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             borderRadius: BorderRadius.only(
                                 topRight: Radius.circular(20),
                                 bottomRight: Radius.circular(20))),
+                        child: MyPetsContent(
+                          petsTitle: 'Sola',
+                          petsSubTitle: 'Abyssinian cat',
+                          petsYears: 2,
+                          petsDistance: 3.6,
+                        ),
                       ),
                     ),
                   ],
@@ -194,6 +221,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           borderRadius: BorderRadius.only(
                               topRight: Radius.circular(20),
                               bottomRight: Radius.circular(20))),
+                      child: MyPetsContent(
+                        petsTitle: 'Orion',
+                        petsSubTitle: 'Abyssinian cat',
+                        petsYears: 1.5,
+                        petsDistance: 7.8,
+                      ),
                     ),
                   ),
                 ],
@@ -205,6 +238,75 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class MyPetsContent extends StatelessWidget {
+  final String petsTitle;
+  final String petsSubTitle;
+  final double petsYears;
+  final double petsDistance;
+
+  MyPetsContent(
+      {this.petsTitle, this.petsSubTitle, this.petsYears, this.petsDistance});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                petsTitle,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+              Icon(
+                FontAwesomeIcons.mars,
+                color: Colors.grey[400],
+              )
+            ],
+          ),
+        ),
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: Text(
+            petsSubTitle,
+            style: TextStyle(color: Colors.grey[600], fontSize: 15),
+          ),
+        ),
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: Text(
+            '$petsYears years old',
+            style: TextStyle(color: Colors.grey),
+          ),
+        ),
+        Container(
+          padding: EdgeInsets.only(left: 20),
+          child: Row(
+            children: [
+              Icon(
+                Icons.location_on,
+                size: 15,
+                color: primaryGreen,
+              ),
+              SizedBox(
+                width: 5,
+              ),
+              Text(
+                'Distance: $petsDistance km',
+                style: TextStyle(color: Colors.grey),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

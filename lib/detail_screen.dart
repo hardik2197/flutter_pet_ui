@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ui/configure.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class DetailScreen extends StatelessWidget {
   @override
@@ -8,20 +9,69 @@ class DetailScreen extends StatelessWidget {
       body: Stack(
         children: [
           Positioned.fill(
-              child: Column(
-            children: [
-              Expanded(
-                child: Container(
-                  color: Colors.blueGrey[300],
+            child: Column(
+              children: [
+                Expanded(
+                  child: Container(
+                    color: Colors.blueGrey[300],
+                  ),
                 ),
-              ),
-              Expanded(
-                child: Container(
-                  color: Colors.white,
+                Expanded(
+                  child: Container(
+                    margin: EdgeInsets.only(top: 100),
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    color: Colors.white,
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            CircleAvatar(),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                              width: MediaQuery.of(context).size.width - 90,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'Maya Berkovskaya',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18),
+                                      ),
+                                      Text('May 25, 2019'),
+                                    ],
+                                  ),
+                                  Text(
+                                    'Owner',
+                                    style: TextStyle(color: Colors.grey),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          'My job requires moving to another country. '
+                              'I don\'t have the opportunity to take the cat with me. '
+                              'I am looking for good people who will shelter my Sola.',
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-              )
-            ],
-          )),
+              ],
+            ),
+          ),
           Container(
             margin: EdgeInsets.only(top: 50),
             child: Align(
@@ -30,13 +80,19 @@ class DetailScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                    icon: Icon(Icons.arrow_back_ios),
+                    icon: FaIcon(
+                      FontAwesomeIcons.arrowLeft,
+                      color: primaryGreen,
+                    ),
                     onPressed: () {
                       Navigator.pop(context);
                     },
                   ),
                   IconButton(
-                    icon: Icon(Icons.share),
+                    icon: FaIcon(
+                      FontAwesomeIcons.externalLinkAlt,
+                      color: primaryGreen,
+                    ),
                     onPressed: () {},
                   )
                 ],
@@ -59,12 +115,81 @@ class DetailScreen extends StatelessWidget {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: shadowList),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Sola',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 30),
+                        ),
+                        Icon(
+                          FontAwesomeIcons.mars,
+                          size: 30,
+                          color: Colors.grey[400],
+                        )
+                      ],
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: Text(
+                          'Abyssinian cat',
+                          style: TextStyle(
+                              color: Colors.grey[600],
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: Text(
+                          '2 years old',
+                          style: TextStyle(
+                            color: Colors.grey[600],
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(left: 20),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.location_on,
+                          size: 18,
+                          color: primaryGreen,
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          '5 Bulvarno-Kudriavska Street, Kyiv',
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
-              height: 150,
+              height: 130,
               child: Container(
                 margin: EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
